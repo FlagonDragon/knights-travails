@@ -21,8 +21,8 @@ class Knight {
 
         this.x = x;
         this.y = y;
-        this.sqr = myBoard[y][x];
-
+        this.sqr = `[${this.x},${this.y}]`;
+        myBoard[y][x] = 'k';
     }
 
     moveTopRightUp() {
@@ -41,9 +41,11 @@ class Knight {
     }
 
     moveTopLeftUp() {
+        myBoard[this.y][this.x] = 1;
         this.x = this.x + 1;
         this.y = this.y + 2;
-        this.sqr = myBoard[this.y][this.x];
+        myBoard[this.y][this.x] = 'k';
+        this.sqr = `[${this.x},${this.y}]`;
     }
     
     moveTopLeftDown() {
@@ -70,18 +72,9 @@ strings!`;
 
 const dunk = new Knight(0, 0);
 
-myBoard[2][1] = 21;
-myBoard[4][2] = 42;
-
-console.log(dunk);
-
-console.log(dunk.sqr);
-
 dunk.moveTopLeftUp();
 dunk.moveTopLeftUp();
-
-
-console.log(dunk.sqr);
+dunk.moveTopLeftUp();
 
 console.log(dunk);
 
