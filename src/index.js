@@ -1,4 +1,5 @@
 import './styles.css';
+import testMove from './testMove';
 
 console.log('SHOWTIME!!!');
 
@@ -22,42 +23,47 @@ class Knight {
         this.x = x;
         this.y = y;
         this.sqr = `[${this.x},${this.y}]`;
-        myBoard[y][x] = 'k';
+        myBoard[y][x] = 9;
+    }
+
+    move(xDelta, yDelta) {
+        myBoard[this.y][this.x] = 1;
+        this.x = this.x + xDelta;
+        this.y = this.y + yDelta;
+        myBoard[this.y][this.x] = 9;
+        this.sqr = `[${this.x},${this.y}]`;
     }
 
     moveTopRightUp() {
+        this.move(-1, 2);
     }
     
     moveTopRightDown() {
-        
+        this.move(-2, 1);    
     }
 
     moveBotRightUp() {
-        
+        this.move(-2, -1);    
     }
 
     moveBotRightDown() {
-        
+        this.move(-1, -2);    
     }
 
     moveTopLeftUp() {
-        myBoard[this.y][this.x] = 1;
-        this.x = this.x + 1;
-        this.y = this.y + 2;
-        myBoard[this.y][this.x] = 'k';
-        this.sqr = `[${this.x},${this.y}]`;
+        this.move(1, 2);
     }
     
     moveTopLeftDown() {
-        
+        this.move(2, 1);    
     }
 
     moveBotLeftUp() {
-        
+        this.move(2, -1);    
     }
 
     moveBotLeftDown() {
-        
+        this.move(1, -2);    
     }
 
 }
@@ -70,11 +76,12 @@ strings!`;
 
 }
 
-const dunk = new Knight(0, 0);
+const dunk = new Knight(4, 4);
 
-dunk.moveTopLeftUp();
-dunk.moveTopLeftUp();
-dunk.moveTopLeftUp();
+
+testMove(dunk);
+
+
 
 console.log(dunk);
 
