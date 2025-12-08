@@ -3,7 +3,7 @@ import testMove from './testMove';
 
 console.log('SHOWTIME!!!');
 
-let myBoard = [];
+let emptyBoard = [];
 let boardRow = []
 
 for (let x = 0; x <= 7; x++) {
@@ -11,18 +11,19 @@ for (let x = 0; x <= 7; x++) {
 };
 
 for (let y = 0; y <= 7; y++) {
-    myBoard.push(boardRow.slice());
+    emptyBoard.push(boardRow.slice());
 };
 
-console.log(myBoard);
+console.log(emptyBoard);
 
 class Knight {
 
-    constructor(x, y) {
+    constructor(x, y, board) {
         this.x = x;
         this.y = y;
+        this.board = board;
         this.sqr = `[${this.x},${this.y}]`;
-        myBoard[y][x] = 9;
+        this.board[y][x] = 9;
     }
 
     test(xDelta, yDelta) {        
@@ -30,7 +31,7 @@ class Knight {
         let xTarget = this.x + xDelta;
         let yTarget = this.y + yDelta;
         
-        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || myBoard[yTarget][xTarget] == 1) {
+        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
             return false;
         }
 
@@ -71,14 +72,14 @@ class Knight {
         let xTarget = this.x + xDelta;
         let yTarget = this.y + yDelta;
 
-        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || myBoard[yTarget][xTarget] == 1) {
+        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
             throw new Error('Invalid move!')
         }
 
-        myBoard[this.y][this.x] = 1;
+        this.board[this.y][this.x] = 1;
         this.x = xTarget;
         this.y = yTarget;
-        myBoard[this.y][this.x] = 9;
+        this.board[this.y][this.x] = 9;
         this.sqr = `[${this.x},${this.y}]`;
 
     }
@@ -109,19 +110,13 @@ class Knight {
 
 };
 
-const dunk = new Knight(3, 3);
+const dunk = new Knight(3, 3, emptyBoard);
 // testMove(dunk);
 console.log(dunk);
 
 // let edges = dunk.edgeList();
 // console.log(edges);
 
-dunk.makeMoves();
-
-function knightMoves(start, end) {
-
-    return `:)`;
-
-};
+// dunk.makeMoves();
  
 console.log(dunk);
