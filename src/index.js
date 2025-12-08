@@ -50,13 +50,14 @@ class Knight {
     edgeList() {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
+        deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
         
         let edges = [];
 
         deltas.forEach(delta => {
 
             if (this.test(delta.x, delta.y) == true) {
-                edges.push(delta)
+                edges.push(delta);
             }
 
         });
@@ -69,6 +70,10 @@ class Knight {
         
         let xTarget = this.x + xDelta;
         let yTarget = this.y + yDelta;
+
+        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || myBoard[yTarget][xTarget] == 1) {
+            throw new Error('Invalid move!')
+        }
 
         myBoard[this.y][this.x] = 1;
         this.x = xTarget;
@@ -87,16 +92,31 @@ class Knight {
     moveBotLeftUp() {this.move(2, -1)}
     moveBotLeftDown() {this.move(1, -2)}
 
+    makeMoves() {
+
+        let moveList = this.edgeList();
+
+        console.log(moveList);
+        
+
+        moveList.forEach(move => {
+            console.log(move.x+', '+move.y);
+            
+            this.move(move.x, move.y);
+        });
+
+    }
+
 };
 
 const dunk = new Knight(3, 3);
 // testMove(dunk);
 console.log(dunk);
 
-let edges = dunk.edgeList();
-console.log(edges);
+// let edges = dunk.edgeList();
+// console.log(edges);
 
-
+dunk.makeMoves();
 
 function knightMoves(start, end) {
 

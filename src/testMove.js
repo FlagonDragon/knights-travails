@@ -29,3 +29,10 @@ myClass.moveTopRightUp();
 };
 
 export default testMove;
+
+// NOTES
+
+// let move function inherit current iteration of graph and step counter 
+// return step counter at the end if target square is reached
+// replace record with lowest avaliable step counter to find minimum amount of moves
+// then edit function to output coordinates of each move made in shortest sequence
