@@ -28,18 +28,4 @@ myClass.moveTopRightUp();
 
 };
 
-// import function array
-
-function validMoves() {
-    let myArray = [];
-
-    functionArray.forEach(func => {
-        // execute
-        // if return valid push to myArray
-    });
-
-    return myArray;
-
-}
-
 export default testMove;

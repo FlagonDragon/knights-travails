@@ -19,25 +19,17 @@ console.log(myBoard);
 class Knight {
 
     constructor(x, y) {
-
         this.x = x;
         this.y = y;
         this.sqr = `[${this.x},${this.y}]`;
         myBoard[y][x] = 9;
     }
 
-    test(xDelta, yDelta) {
-
-        console.log(xDelta+', '+yDelta);
-        
+    test(xDelta, yDelta) {        
         
         let xTarget = this.x + xDelta;
         let yTarget = this.y + yDelta;
-
-        console.log(xTarget+','+yTarget);
         
-        console.log(myBoard[yTarget][xTarget]);
-
         if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || myBoard[yTarget][xTarget] == 1) {
             return false;
         }
@@ -57,7 +49,8 @@ class Knight {
 
     edgeList() {
 
-        let deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
+        let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
+        
         let edges = [];
 
         deltas.forEach(delta => {
@@ -94,66 +87,21 @@ class Knight {
     moveBotLeftUp() {this.move(2, -1)}
     moveBotLeftDown() {this.move(1, -2)}
 
-    // functionArray = [this.moveTopRightUp, this.moveTopRightDown];
-
-}
+};
 
 const dunk = new Knight(3, 3);
 // testMove(dunk);
 console.log(dunk);
-// dunk.moveTopLeftUp();
-// dunk.moveTopLeftUp();
 
-
-
-function testing(myClass) {
-
-    let emptyArray = [];
-
-    let methods = [myClass.moveTopRightUp, myClass.moveTopRightDown];
-
-    //bind class or 'this' method will be undefined
-    // functionsArray[0].bind(myClass)();
-
-    methods.forEach(method => {
-        let result = method.bind(myClass)();
-
-        console.log(result);
-        
-
-        if (result == 'valid') {
-            emptyArray.push(method);
-        }
-    });
-
-    return emptyArray;
-
-}
-
-// testMove(dunk);
-dunk.moveTopRightUp();
-dunk.moveBotLeftDown();
-
-// console.log(dunk.testTopRightUp());
-
-// let testArray = dunk.edgeList();
-// console.log(testArray);
-
+let edges = dunk.edgeList();
+console.log(edges);
 
 
 
 function knightMoves(start, end) {
 
-    
-
     return `:)`;
 
-}
+};
  
-
-// console.log(knightMoves());
-console.log(dunk.test(-1,2));
-// console.log(dunk.testTopRightUp());
 console.log(dunk);
-
-
