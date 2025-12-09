@@ -14,14 +14,12 @@ for (let y = 0; y <= 7; y++) {
     emptyBoard.push(boardRow.slice());
 };
 
-console.log(emptyBoard);
-
 class Knight {
 
     constructor(x, y, board) {
         this.x = x;
         this.y = y;
-        this.board = board;
+        this.board = JSON.parse(JSON.stringify(board));
         this.sqr = `[${this.x},${this.y}]`;
         this.board[y][x] = 9;
     }
@@ -84,6 +82,27 @@ class Knight {
 
     }
 
+    move2(matrix, x, y, xDelta, yDelta) {
+
+        // Parse to make deepy copy. Shallow copy doesn't work with array of arrays
+        let newBoard = JSON.parse(JSON.stringify(matrix));
+        
+        let xTarget = x + xDelta;
+        let yTarget = y + yDelta;
+
+        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || newBoard[yTarget][xTarget] == 1) {
+            throw new Error('Invalid move!');
+        }
+
+        newBoard[y][x] = 1;
+        x = xTarget;
+        y = yTarget;
+        newBoard[y][x] = 4;
+        
+        return {x: x, y: y, board: newBoard};
+
+    }
+
     moveTopRightUp() {this.move(-1, 2)}
     moveTopRightDown() {this.move(-2, 1)}
     moveBotRightUp() {this.move(-2, -1)}
@@ -110,13 +129,14 @@ class Knight {
 
 };
 
-const dunk = new Knight(3, 3, emptyBoard);
+const dunk = new Knight(3, 3, emptyBoard.slice());
 // testMove(dunk);
 console.log(dunk);
 
-// let edges = dunk.edgeList();
-// console.log(edges);
+let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
 
-// dunk.makeMoves();
+console.log(testData);
+
  
+console.log(dunk.board);
 console.log(dunk);
