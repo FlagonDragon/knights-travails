@@ -49,7 +49,7 @@ class Knight {
     edgeList(matrix, x, y) {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
-        // deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
+        deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
         // deltas = [{x: -1, y: 2}];
         
         let edges = [];
@@ -100,7 +100,7 @@ class Knight {
 
         let moveList = this.edgeList(matrix, x, y);
 
-        let myArray = [];
+        // let myArray = [];
 
         console.log(moveList);
         
@@ -112,11 +112,13 @@ class Knight {
 
             console.log(moveData);
 
-            myArray.push(moveData);
+            this.makeMoves(moveData.board, moveData.x, moveData.y);
+
+            // myArray.push(moveData);
             
         });
 
-        return myArray;
+        // return myArray;
 
     }
 
@@ -131,11 +133,11 @@ console.log(dunk);
 
 let movesArray = dunk.makeMoves(dunk.board, dunk.x, dunk.y);
 
-console.log(movesArray);
+// console.log(movesArray);
 
-let repeat = dunk.makeMoves(movesArray[2].board, movesArray[2].x, movesArray[2].y);
+// let repeat = dunk.makeMoves(movesArray[2].board, movesArray[2].x, movesArray[2].y);
 
-console.log(repeat);
+// console.log(repeat);
 
 
 

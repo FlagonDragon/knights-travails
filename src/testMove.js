@@ -37,6 +37,8 @@ export default testMove;
 // replace record with lowest avaliable step counter to find minimum amount of moves
 // then edit function to output coordinates of each move made in shortest sequence
 
+// https://www.w3schools.com/js/js_maps.asp
+
 function test1(xDelta, yDelta) {        
         
     let xTarget = this.x + xDelta;
@@ -66,3 +68,4 @@ function move1(xDelta, yDelta) {
     this.sqr = `[${this.x},${this.y}]`;
 
 }
+
