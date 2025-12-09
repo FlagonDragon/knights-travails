@@ -36,3 +36,33 @@ export default testMove;
 // return step counter at the end if target square is reached
 // replace record with lowest avaliable step counter to find minimum amount of moves
 // then edit function to output coordinates of each move made in shortest sequence
+
+function test1(xDelta, yDelta) {        
+        
+    let xTarget = this.x + xDelta;
+    let yTarget = this.y + yDelta;
+
+    if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
+        return false;
+    }
+
+    return true;
+
+    }
+
+function move1(xDelta, yDelta) {
+    
+    let xTarget = this.x + xDelta;
+    let yTarget = this.y + yDelta;
+
+    if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
+        throw new Error('Invalid move!')
+    }
+
+    this.board[this.y][this.x] = 1;
+    this.x = xTarget;
+    this.y = yTarget;
+    this.board[this.y][this.x] = 9;
+    this.sqr = `[${this.x},${this.y}]`;
+
+}

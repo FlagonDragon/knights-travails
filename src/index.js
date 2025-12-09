@@ -24,12 +24,12 @@ class Knight {
         this.board[y][x] = 9;
     }
 
-    test(xDelta, yDelta) {        
+    test(matrix, x, y, xDelta, yDelta) {        
         
-        let xTarget = this.x + xDelta;
-        let yTarget = this.y + yDelta;
+        let xTarget = x + xDelta;
+        let yTarget = y + yDelta;
         
-        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
+        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || matrix[yTarget][xTarget] == 1) {
             return false;
         }
 
@@ -46,16 +46,17 @@ class Knight {
     testBotLeftUp() {return this.test(2, -1)}
     testBotLeftDown() {return this.test(1, -2)}
 
-    edgeList() {
+    edgeList(matrix, x, y) {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
         deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
+        // deltas = [{x: -1, y: 2}];
         
         let edges = [];
 
         deltas.forEach(delta => {
 
-            if (this.test(delta.x, delta.y) == true) {
+            if (this.test(matrix, x, y, delta.x, delta.y) == true) {
                 edges.push(delta);
             }
 
@@ -65,24 +66,7 @@ class Knight {
 
     }
 
-    move(xDelta, yDelta) {
-        
-        let xTarget = this.x + xDelta;
-        let yTarget = this.y + yDelta;
-
-        if ( xTarget > 7 || xTarget < 0 || yTarget > 7 || yTarget < 0 || this.board[yTarget][xTarget] == 1) {
-            throw new Error('Invalid move!')
-        }
-
-        this.board[this.y][this.x] = 1;
-        this.x = xTarget;
-        this.y = yTarget;
-        this.board[this.y][this.x] = 9;
-        this.sqr = `[${this.x},${this.y}]`;
-
-    }
-
-    move2(matrix, x, y, xDelta, yDelta) {
+    move(matrix, x, y, xDelta, yDelta) {
 
         // Parse to make deepy copy. Shallow copy doesn't work with array of arrays
         let newBoard = JSON.parse(JSON.stringify(matrix));
@@ -97,7 +81,7 @@ class Knight {
         newBoard[y][x] = 1;
         x = xTarget;
         y = yTarget;
-        newBoard[y][x] = 4;
+        newBoard[y][x] = 9;
         
         return {x: x, y: y, board: newBoard};
 
@@ -112,17 +96,18 @@ class Knight {
     moveBotLeftUp() {this.move(2, -1)}
     moveBotLeftDown() {this.move(1, -2)}
 
-    makeMoves() {
+    makeMoves(matrix, x, y) {
 
-        let moveList = this.edgeList();
+        let moveList = this.edgeList(matrix, x, y);
 
         console.log(moveList);
         
-
         moveList.forEach(move => {
+
             console.log(move.x+', '+move.y);
             
-            this.move(move.x, move.y);
+            console.log(this.move(this.board, this.x, this.y, move.x, move.y));
+            
         });
 
     }
@@ -133,10 +118,7 @@ const dunk = new Knight(3, 3, emptyBoard.slice());
 // testMove(dunk);
 console.log(dunk);
 
-let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
+// let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
+// console.log(testData.board);
 
-console.log(testData);
-
- 
-console.log(dunk.board);
-console.log(dunk);
+dunk.makeMoves(dunk.board, dunk.x, dunk.y);
