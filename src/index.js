@@ -49,7 +49,7 @@ class Knight {
     edgeList(matrix, x, y) {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
-        deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
+        // deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
         // deltas = [{x: -1, y: 2}];
         
         let edges = [];
@@ -100,15 +100,23 @@ class Knight {
 
         let moveList = this.edgeList(matrix, x, y);
 
+        let myArray = [];
+
         console.log(moveList);
         
         moveList.forEach(move => {
 
             console.log(move.x+', '+move.y);
             
-            console.log(this.move(this.board, this.x, this.y, move.x, move.y));
+            let moveData = this.move(matrix, x, y, move.x, move.y);
+
+            console.log(moveData);
+
+            myArray.push(moveData);
             
         });
+
+        return myArray;
 
     }
 
@@ -121,4 +129,13 @@ console.log(dunk);
 // let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
 // console.log(testData.board);
 
-dunk.makeMoves(dunk.board, dunk.x, dunk.y);
+let movesArray = dunk.makeMoves(dunk.board, dunk.x, dunk.y);
+
+console.log(movesArray);
+
+let repeat = dunk.makeMoves(movesArray[2].board, movesArray[2].x, movesArray[2].y);
+
+console.log(repeat);
+
+
+
