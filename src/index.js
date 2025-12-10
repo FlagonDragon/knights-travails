@@ -136,20 +136,45 @@ class Knight {
 
 };
 
-const dunk = new Knight(3, 3, emptyBoard.slice());
-// testMove(dunk);
-console.log(dunk);
+const dunk = new Knight(3, 3, emptyBoard);
 
-// let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
-// console.log(testData.board);
+console.log(dunk.makeMoves(dunk.board, dunk.x, dunk.y, 0, 0));
 
-let movesArray = dunk.makeMoves(dunk.board, dunk.x, dunk.y, 0, 0);
+function knightMoves(x, y, xTarget, yTarget) {
 
-console.log(movesArray);
+    const knight = new Knight(x, y, emptyBoard);
 
-// let repeat = dunk.makeMoves(movesArray[2].board, movesArray[2].x, movesArray[2].y);
+    const paths = knight.makeMoves(knight.board, x, y, xTarget, yTarget);
 
-// console.log(repeat);
+    if (paths == []) {
+        return 'Coordinates not reached';
+    }
+
+    let shortestPath = 1000;
+
+    paths.forEach(path => {
+
+        if (path.count < shortestPath) {
+            shortestPath = path.count;
+        }
+         
+    });
+
+    for (let path of paths) {
+
+        if (path.count == shortestPath) {
+
+            return path.steps.slice(0, -1);
+
+        }
+
+    }
+
+};
+
+console.log(knightMoves(3, 3, 0, 0));
+
+
 
 
 
