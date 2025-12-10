@@ -48,7 +48,7 @@ class Knight {
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
         // deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
         // deltas = [{x: -1, y: 2}];
-        deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
+        // deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
         // deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}];
         
         let edges = [];
@@ -111,7 +111,7 @@ class Knight {
             
             let moveData = this.move(matrix, x, y, move.x, move.y, count, steps);
 
-            // console.log(moveData);
+            console.log(moveData);
 
             if (moveData.x == xFinal && moveData.y == yFinal) {
 
@@ -119,9 +119,13 @@ class Knight {
                 
                 myArray.push(moveData);
 
-            } else {
+            } else if (moveData.count < 7) {
 
                 this.makeMoves(moveData.board, moveData.x, moveData.y, xFinal, yFinal, moveData.count, moveData.steps, myArray);
+
+            } else {
+
+                return;
 
             }
             
@@ -141,7 +145,7 @@ function knightMoves(x, y, xTarget, yTarget) {
 
     const knight = new Knight(x, y, emptyBoard);
 
-    const paths = knight.makeMoves(knight.board, x, y, xTarget, yTarget);
+    const paths = knight.makeMoves(knight.board, x, y, xTarget, yTarget);    
 
     if (!paths.length) {
         return 'Coordinates not reached';
@@ -169,12 +173,10 @@ function knightMoves(x, y, xTarget, yTarget) {
 
 };
 
-console.log(knightMoves(3, 3, 0, 0));
+// console.log(knightMoves(3, 3, 0, 0));
 // console.log(knightMoves(0, 0, 3, 3));
-
-function add(a, b) {
-    return a+b;
-}
+console.log(knightMoves(0, 0, 7, 7));
+console.log(knightMoves(3, 3, 4, 3));
 
 
 
