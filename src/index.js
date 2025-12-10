@@ -66,9 +66,9 @@ class Knight {
 
     }
 
-    move(matrix, x, y, xDelta, yDelta, steps = 0) {
+    move(matrix, x, y, xDelta, yDelta, count = 0, steps = `[${x},${y}],`) {
 
-        steps ++
+        count ++
         
         // Parse to make deepy copy. Shallow copy doesn't work with array of arrays
         let newBoard = JSON.parse(JSON.stringify(matrix));
@@ -84,8 +84,10 @@ class Knight {
         x = xTarget;
         y = yTarget;
         newBoard[y][x] = 9;
+
+        steps += `[${x},${y}],`;
         
-        return {x: x, y: y, board: newBoard, steps: steps};
+        return {x: x, y: y, board: newBoard, count: count, steps: steps};
 
     }
 
@@ -98,7 +100,7 @@ class Knight {
     moveBotLeftUp() {this.move(2, -1)}
     moveBotLeftDown() {this.move(1, -2)}
 
-    makeMoves(matrix, x, y, steps = 0) {
+    makeMoves(matrix, x, y, count = 0, steps) {
 
         let moveList = this.edgeList(matrix, x, y);
 
@@ -110,11 +112,11 @@ class Knight {
 
             console.log(move.x+', '+move.y);
             
-            let moveData = this.move(matrix, x, y, move.x, move.y, steps);
+            let moveData = this.move(matrix, x, y, move.x, move.y, count, steps);
 
             console.log(moveData);
 
-            this.makeMoves(moveData.board, moveData.x, moveData.y, moveData.steps);
+            this.makeMoves(moveData.board, moveData.x, moveData.y, moveData.count, moveData.steps);
 
             // myArray.push(moveData);
             
