@@ -1,6 +1,3 @@
-import './styles.css';
-import testMove from './testMove';
-
 console.log('SHOWTIME!!!');
 
 let emptyBoard = [];
@@ -51,7 +48,7 @@ class Knight {
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
         // deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
         // deltas = [{x: -1, y: 2}];
-        // deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
+        deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
         // deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}];
         
         let edges = [];
@@ -106,19 +103,19 @@ class Knight {
 
         let moveList = this.edgeList(matrix, x, y);
 
-        console.log(moveList);
+        // console.log(moveList);
         
         moveList.forEach(move => {
 
-            console.log(move.x+', '+move.y);
+            // console.log(move.x+', '+move.y);
             
             let moveData = this.move(matrix, x, y, move.x, move.y, count, steps);
 
-            console.log(moveData);
+            // console.log(moveData);
 
             if (moveData.x == xFinal && moveData.y == yFinal) {
 
-                console.log('got em');
+                // console.log('got em');
                 
                 myArray.push(moveData);
 
@@ -136,9 +133,9 @@ class Knight {
 
 };
 
-const dunk = new Knight(3, 3, emptyBoard);
+// const dunk = new Knight(3, 3, emptyBoard);
 
-console.log(dunk.makeMoves(dunk.board, dunk.x, dunk.y, 0, 0));
+// console.log(dunk.makeMoves(dunk.board, dunk.x, dunk.y, 0, 0));
 
 function knightMoves(x, y, xTarget, yTarget) {
 
@@ -172,8 +169,12 @@ function knightMoves(x, y, xTarget, yTarget) {
 
 };
 
-// console.log(knightMoves(3, 3, 0, 0));
-console.log(knightMoves(0, 0, 3, 3));
+console.log(knightMoves(3, 3, 0, 0));
+// console.log(knightMoves(0, 0, 3, 3));
+
+function add(a, b) {
+    return a+b;
+}
 
 
 
