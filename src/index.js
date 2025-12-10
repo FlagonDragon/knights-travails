@@ -50,7 +50,9 @@ class Knight {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
         deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
-        // deltas = [{x: -1, y: 2}];
+        deltas = [{x: -1, y: 2}];
+        deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
+
         
         let edges = [];
 
@@ -100,11 +102,9 @@ class Knight {
     moveBotLeftUp() {this.move(2, -1)}
     moveBotLeftDown() {this.move(1, -2)}
 
-    makeMoves(matrix, x, y, count = 0, steps) {
+    makeMoves(matrix, x, y, xFinal, yFinal, count = 0, steps, myArray = []) {
 
         let moveList = this.edgeList(matrix, x, y);
-
-        // let myArray = [];
 
         console.log(moveList);
         
@@ -116,13 +116,21 @@ class Knight {
 
             console.log(moveData);
 
-            this.makeMoves(moveData.board, moveData.x, moveData.y, moveData.count, moveData.steps);
+            if (moveData.x == xFinal && moveData.y == yFinal) {
 
-            // myArray.push(moveData);
+                console.log('got em');
+                
+                myArray.push(moveData);
+
+            } else {
+
+                this.makeMoves(moveData.board, moveData.x, moveData.y, xFinal, yFinal, moveData.count, moveData.steps, myArray);
+
+            }
             
         });
-
-        // return myArray;
+        
+        return myArray;
 
     }
 
@@ -135,9 +143,9 @@ console.log(dunk);
 // let testData = dunk.move2(dunk.board, dunk.x, dunk.y, -1, 2);
 // console.log(testData.board);
 
-let movesArray = dunk.makeMoves(dunk.board, dunk.x, dunk.y);
+let movesArray = dunk.makeMoves(dunk.board, dunk.x, dunk.y, 0, 0);
 
-// console.log(movesArray);
+console.log(movesArray);
 
 // let repeat = dunk.makeMoves(movesArray[2].board, movesArray[2].x, movesArray[2].y);
 
