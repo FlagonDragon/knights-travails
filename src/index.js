@@ -49,10 +49,10 @@ class Knight {
     edgeList(matrix, x, y) {
 
         let deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}, {x: -1, y: -2}, {x: 1, y: 2}, {x: 2, y: 1}, {x: 2, y: -1}, {x: 1, y: -2}];
-        deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
-        deltas = [{x: -1, y: 2}];
-        deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
-
+        // deltas = [{x: -1, y: 2}, {x: -2, y: 1}];
+        // deltas = [{x: -1, y: 2}];
+        // deltas = [{x: -1, y: -2}, {x: -2, y: -1}];
+        // deltas = [{x: -1, y: 2}, {x: -2, y: 1}, {x: -2, y: -1}];
         
         let edges = [];
 
@@ -146,7 +146,7 @@ function knightMoves(x, y, xTarget, yTarget) {
 
     const paths = knight.makeMoves(knight.board, x, y, xTarget, yTarget);
 
-    if (paths == []) {
+    if (!paths.length) {
         return 'Coordinates not reached';
     }
 
@@ -172,7 +172,9 @@ function knightMoves(x, y, xTarget, yTarget) {
 
 };
 
-console.log(knightMoves(3, 3, 0, 0));
+// console.log(knightMoves(3, 3, 0, 0));
+console.log(knightMoves(0, 0, 3, 3));
+
 
 
 
